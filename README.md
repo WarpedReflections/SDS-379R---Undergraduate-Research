@@ -15,6 +15,11 @@ This project aims to classify Atta leafcutter-ant images from iNaturalist using 
 - Employ and fine-tune pre-trained models like Faster R-CNN, YOLO, and ResNet.
 - Document model selection, training processes, and optimization techniques comprehensively.
 
+## Large File Download
+The dataset used in this project is too large to be hosted on GitHub. It can be downloaded from the following link:
+
+[Download iNAT_images.zip](https://utexas.box.com/shared/static/hh8rwaed5xqg7frot777l316az701pou.zip)
+
 ## Tools and Technologies
 - Machine Learning Models: Faster R-CNN, YOLO, ResNet
 - Computing Resources: Texas Advanced Computing Center (TACC)
