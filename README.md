@@ -11,8 +11,7 @@ This project aims to classify Atta leafcutter-ant images from iNaturalist using 
 - Classify ant images into categories: Gender (Male/Female), Status (Alive/Dead), Role (Alate/Dealate).
 
 ## Methodology
-- Utilize computational tools and resources from the Texas Advanced Computing Center (TACC).
-- Employ and fine-tune pre-trained models like Faster R-CNN, YOLO, and ResNet.
+- Employ and fine-tune a pre-trained model like Faster R-CNN.
 - Document model selection, training processes, and optimization techniques comprehensively.
 
 ## Large File Download
@@ -21,8 +20,7 @@ The dataset used in this project is too large to be hosted on GitHub. It can be 
 [Download iNAT_images.zip](https://utexas.box.com/shared/static/hh8rwaed5xqg7frot777l316az701pou.zip)
 
 ## Tools and Technologies
-- Machine Learning Models: Faster R-CNN, YOLO, ResNet
-- Computing Resources: Texas Advanced Computing Center (TACC)
+- Machine Learning Model: Faster R-CNN
 
 ## Acknowledgements
 - Dr. Fatma Tarlaci for her supervision and expertise in machine learning.
