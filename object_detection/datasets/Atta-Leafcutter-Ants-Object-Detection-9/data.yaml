@@ -1,0 +1,18 @@
+names:
+- Alive-Female-Alate
+- Alive-Female-Dealate
+- Alive-Male-Alate
+- Dead-Female-Alate
+- Dead-Female-Dealate
+- Dead-Male-Alate
+- Dead-Male-Dealate
+nc: 7
+roboflow:
+  license: CC BY 4.0
+  project: atta-leafcutter-ants-object-detection
+  url: https://universe.roboflow.com/sds-379r/atta-leafcutter-ants-object-detection/dataset/9
+  version: 9
+  workspace: sds-379r
+test: test/images
+train: train/images
+val: valid/images
