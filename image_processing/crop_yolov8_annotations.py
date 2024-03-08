@@ -1,12 +1,22 @@
-# Import necessary libraries.
 import os
 from PIL import Image
 from roboflow import Roboflow
 
 def normalize_bbox(width, height, bbox):
     """
-    Converts normalized bounding box coordinates (x_center, y_center, width, height) to absolute pixel values.
+    Converts bounding box coordinates from relative to absolute pixel values.
+
+    Args:
+        width (int): The width of the image.
+        height (int): The height of the image.
+        bbox (list): A list of bounding box coordinates in the format [x_center, y_center, bbox_width, bbox_height],
+                     where each value is relative to the width and height.
+
+    Returns:
+        list: A list of bounding box coordinates in the format [top_left_x, top_left_y, bottom_right_x, bottom_right_y]
+              in absolute pixel values.
     """
+    # Calculate absolute bounding box dimensions.
     x_center, y_center, bbox_width, bbox_height = (dim * size for dim, size in zip(bbox, (width, height, width, height)))
     top_left_x = x_center - (bbox_width / 2)
     top_left_y = y_center - (bbox_height / 2)
@@ -14,7 +24,16 @@ def normalize_bbox(width, height, bbox):
 
 def crop_image(img, bbox, idx, cropped_path, image_file):
     """
-    Crops the image based on the bounding box and saves the cropped image with a simplified name.
+    Crops an image according to the specified bounding box and saves it.
+
+    Args:
+        img (Image.Image): The image to crop.
+        bbox (list): The bounding box with which to crop the image, specified as [top_left_x, top_left_y, bottom_right_x, bottom_right_y].
+        idx (int): Index of the bounding box, used to generate unique file names.
+        cropped_path (str): The directory path where the cropped images will be saved.
+        image_file (str): The original image file name, used to generate the cropped image file name.
+
+    This function does not return a value but saves the cropped image in the specified path.
     """
     cropped_img = img.crop(bbox)
 
@@ -29,7 +48,15 @@ def crop_image(img, bbox, idx, cropped_path, image_file):
 
 def process_images(base_dir):
     """
-    Processes the images by cropping according to the bounding boxes.
+    Processes images in a specified base directory for cropping based on bounding box labels.
+
+    For each 'test', 'train', and 'valid' folder, this function reads the label files, 
+    calculates the absolute bounding box coordinates, and crops the images accordingly.
+
+    Args:
+        base_dir (str): The base directory path where the 'test', 'train', and 'valid' folders are located.
+
+    This function does not return a value but results in cropped images being saved in a 'cropped_images' directory within each folder.
     """
     for folder in ['test', 'train', 'valid']:
         labels_path = os.path.join(base_dir, folder, 'labels')
@@ -47,7 +74,12 @@ def process_images(base_dir):
                         bbox_absolute = normalize_bbox(*img.size, bbox)
                         crop_image(img, bbox_absolute, idx, cropped_path, image_file)
 
-if __name__ == "__main__":
+def main():
+    """
+    Main function to orchestrate the downloading and processing of a dataset for image cropping based on bounding boxes.
+
+    Sets the current working directory, downloads the dataset using Roboflow, and processes the images in the dataset.
+    """
     # Set the current working directory to the script's location.
     current_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(current_dir)
@@ -66,3 +98,6 @@ if __name__ == "__main__":
     yolov8_folder = next(os.walk(datasets_dir))[1][0] # Assumes there is only one directory inside 'datasets'.
     base_directory = os.path.join(datasets_dir, yolov8_folder)
     process_images(base_directory)
+
+if __name__ == "__main__":
+    main()  # Execute the main function if the script is run directly.
