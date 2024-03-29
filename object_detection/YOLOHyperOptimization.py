@@ -1,5 +1,5 @@
 import os
-from device_manager import set_device 
+from gpu_roboflow_setup import set_device, download_dataset
 from ultralytics import YOLO
 
 def tune_model_on_custom_dataset(dataset_path, device):
@@ -33,25 +33,16 @@ def tune_model_on_custom_dataset(dataset_path, device):
 
 def main():
     """
-    Main function to set up the environment and tune a YOLO model on a custom dataset.
-
-    This function sets the current working directory to the script's location to ensure that all relative 
-    paths are correctly interpreted. It then defines the path to the custom dataset configuration and determines 
-    the best computation device available. Finally, it calls the tune_model_on_custom_dataset function to 
-    tune a YOLO model on this dataset using the determined device.
-
-    The main function doesn't accept any arguments and doesn't return any value. It serves to orchestrate 
-    the model tuning process.
+    Orchestrates the tuning of a YOLO model on a custom dataset by setting up the environment and managing the workflow.
     """
-    # Set the current working directory to the script's location to ensure relative paths are handled correctly.
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    os.chdir(current_dir)
-
-    # Define the path to the dataset configuration file.
-    dataset_path = os.path.join(current_dir, "datasets/Atta-Leafcutter-Ants-Object-Detection-9/data.yaml")
-
     # Determine the best device to use based on GPU availability and system configuration.
     device = set_device()
+
+    # Acquire the dataset and its path.
+    current_dir, project, dataset = download_dataset()
+
+    # Specify the dataset configuration file path.
+    dataset_path = os.path.join(dataset.location, 'data.yaml')
 
     # Tune the model on the custom dataset using the determined device.
     tune_model_on_custom_dataset(dataset_path, device)

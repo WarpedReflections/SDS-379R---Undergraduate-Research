@@ -1,35 +1,6 @@
 import os
-from device_manager import set_device
-from roboflow import Roboflow
-from ultralytics import checks, YOLO
-
-def download_dataset():
-    """
-    Downloads the specified dataset using Roboflow.
-
-    Performs initial setup and checks, creates a dataset directory if it doesn't exist,
-    and downloads the dataset for 'atta-leafcutter-ants-object-detection'.
-
-    Returns:
-        A tuple containing the current directory, project, and dataset information.
-    """
-    current_dir = os.path.dirname(os.path.abspath(__file__))  # Get the directory of the current script.
-    os.chdir(current_dir)  # Change the working directory to the script's directory.
-    checks()  # Perform initial setup and checks.
-
-    # Create a directory for datasets if not present and move into it.
-    datasets_dir = os.path.join(current_dir, 'datasets')  # Define the path for the datasets directory.
-    os.makedirs(datasets_dir, exist_ok = True)  # Create the datasets directory if it doesn't exist.
-    os.chdir(datasets_dir)  # Change the working directory to the datasets directory.
-
-    # Initialize Roboflow, select the project and download the dataset.
-    rf = Roboflow(api_key = 'VWSCEQrXBqZ0RQBWkwCS')  # Initialize the Roboflow instance with the API key.
-    project = rf.workspace('sds-379r').project('atta-leafcutter-ants-object-detection')  # Select the workspace and project.
-    dataset = project.version(9).download('yolov8')  # Download the specific version of the dataset for YOLOv8.
-
-    os.chdir(current_dir) # Revert to the original working directory.
-
-    return current_dir, project, dataset  # Return the current directory, project, and dataset information.
+from gpu_roboflow_setup import set_device, download_dataset
+from ultralytics import YOLO
 
 def model_train(base_model, train_validation_parameters, current_dir):
     """
