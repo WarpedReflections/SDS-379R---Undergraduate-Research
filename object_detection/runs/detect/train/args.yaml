@@ -1,8 +1,8 @@
 task: detect
 mode: train
-model: yolov8s.pt
-data: C:\Users\steve\Downloads\SDS-379R---Undergraduate-Research\object_detection\datasets/Atta-Leafcutter-Ants-Object-Detection-9/data.yaml
-epochs: 100
+model: C:\Users\steve\Downloads\SDS-379R---Undergraduate-Research\object_detection/runs/first_run/custom_train/weights/best.pt
+data: C:\Users\steve\Downloads\SDS-379R---Undergraduate-Research\object_detection\datasets\Atta-Leafcutter-Ants-Object-Detection-11\data.yaml
+epochs: 30
 patience: 50
 batch: 16
 imgsz: 640
@@ -95,4 +95,4 @@ mixup: 0.0
 copy_paste: 0.0
 cfg: null
 tracker: botsort.yaml
-save_dir: runs\detect\train2
+save_dir: runs\detect\train
