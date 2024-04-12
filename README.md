@@ -19,3 +19,4 @@ This project aims to classify Atta leafcutter-ant images from iNaturalist using 
 
 ## Acknowledgements
 - Dr. Fatma Tarlaci for her supervision and expertise in machine learning.
+- Dr. Ulrich Mueller for initiating this collaborative project and providing the dataset.
