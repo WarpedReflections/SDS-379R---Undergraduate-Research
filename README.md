@@ -19,20 +19,15 @@ To set up the project environment:
 1. Create the Conda environment from the provided `environment.yml` file:
    ```bash
    conda env create -f environment.yml
-   '''
 2. Activate the Conda environment:
    ```bash
    conda activate atta-detection
-   '''
 3. Upgrade PyTorch and torchvision to the latest versions:
    ```bash
    pip install --upgrade torch torchvision
-   '''
-
 4. Install the latest version of Roboflow:
    ```bash
    pip install --upgrade roboflow
-   '''
 
 ## Tools and Technologies
 - Machine Learning Model: YOLOv8
